@@ -255,3 +255,6 @@ ws.onmessage = (event) => {
 ws.onerror = (error) => {
     alert('Erro na conexão WebSocket');
 }
+
+
+

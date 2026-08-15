@@ -17,7 +17,7 @@
         </nav>
     </header>
     <main>
-        
+
         <section id="carteiras">
 
             <article class="carteira">
@@ -78,8 +78,39 @@
 
         <section id="adicionar-carteira">
             <button id="btn-adicionar">Adicionar Carteira</button>
+            <div id="overlay-modal">
+                <div class="modal">
+                    <button id="btn-fechar-modal">
+                        <img src="/frontend/images/cruzado.png">
+                    </button>
+                    
+                    <input class="input-moedas" type="text" id="nome-carteira" placeholder="Nome da Carteira">
+                    <div id="lista-moedas">
+                        <select class="input-moedas" name="criptomoedas" id="select-moedas">
+                            <option value="bitcoin">Bitcoin</option>
+                            <option value="ethereum">Ethereum</option>
+                            <option value="solana">Solana</option>
+                            <option value="xrp">XRP</option>
+                            <option value="BNB">BNB</option>
+                            <option value="cardano">Cardano</option>
+                            <option value="usdt">USDT</option>
+                            <option value="polkadot">Polkadot</option>
+                            <option value="avalanche">Avalanche</option>
+                            <option value="chainlink">Chainlink</option>
+                            <option value="polygon">Polygon</option>
+                            <option value="uniswap">Uniswap</option>
+                            <option value="dogecoin">Dogecoin</option>
+                            <option value="pepe">Pepe</option>
+                        </select>
+                    </div>
+                    <input class="input-moedas" id="btn-quantidade" type="number" placeholder="Exemplo: 0.00524">
+                    <button id="btn-adicionar-moeda">Adicionar Criptomoeda</button>
+                    <button id="btn-salvar">Salvar</button>
+                </div>
+            </div>
         </section>
 
     </main>
+    <script src="/frontend/static/js/carteira.js"></script>
 </body>
 </html>
