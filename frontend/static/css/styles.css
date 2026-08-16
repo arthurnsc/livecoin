@@ -209,7 +209,7 @@ footer p {
 
 
 
-#overlay-modal {
+.overlay {
     display: none;
     position: fixed;
     top: 0;
@@ -233,12 +233,12 @@ footer p {
     gap: 14px;
     position: relative;
 }
-#btn-fechar-modal {
+.btn-fechar-modal {
     position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 19px;
-    height: 19px;
+    top: 4px;
+    right: 2px;
+    width: 9px;
+    height: 9px;
     padding: 0;
     border: none;
     background: transparent;
@@ -248,12 +248,9 @@ footer p {
     justify-content: center;
     border-radius: 6px;
 }
-#btn-fechar-modal:hover {
-    background: rgba(0, 0, 0, 0.06);
-}
-#btn-fechar-modal img {
-    width: 19px;
-    height: 19px;
+.btn-fechar-modal img {
+    width: 25px;
+    height: 25px;
     display: block;
     object-fit: contain;
 }

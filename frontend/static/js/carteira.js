@@ -1,9 +1,27 @@
-const overlay = document.getElementById('overlay-modal')
+const overlaycarteira = document.getElementById('overlay-modal')
 
 document.getElementById('btn-adicionar').addEventListener('click', () => {
-    overlay.style.display = 'flex';
+    overlaycarteira.style.display = 'flex';
 });
 
-document.getElementById('btn-fechar-modal').addEventListener('click', () => {
-    overlay.style.display = 'none';
+document.querySelectorAll('.btn-fechar-modal').forEach(button => {
+    button.addEventListener('click', () => {
+        overlaycarteira.style.display = 'none';
+    });
+});
+
+
+
+const overlaydetalhes = document.getElementById('overlay-modal-detalhes')
+
+document.querySelectorAll('.btn-detalhes').forEach(button => {
+    button.addEventListener('click', () => {
+        overlaydetalhes.style.display = 'flex';
+    });
+});
+
+document.querySelectorAll('.btn-fechar-modal').forEach(button => {
+    button.addEventListener('click', () => {
+        overlaydetalhes.style.display = 'none';
+    });
 });
