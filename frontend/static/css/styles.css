@@ -98,35 +98,6 @@ footer p {
     gap: 20px;
     margin-top: 10px;
 }
-.sub-div-cripto {
-    display: grid;
-    grid-template-columns: 40px 110px 130px 110px;
-    align-items: center;
-    padding: 12px;
-    border-radius: 8px;
-    gap: 15px;
-    margin-bottom: 5px;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.sub-div-cripto .img-cripto {
-    width: 35px;
-    height: 35px;
-    margin: 0;
-}
-
-.sub-div-cripto .h3-cripto {
-    font-size: 17px;
-    margin-right: 0;
-}
-
-.sub-div-cripto .sec-dados {
-    gap: 15px;
-}
-
-.sub-div-cripto .sec-dados p {
-    font-size: 16px;
-}
 .h2-cripto {
     font-size: 25px;
     color: #4d4d4d;
