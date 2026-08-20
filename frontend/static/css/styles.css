@@ -117,8 +117,6 @@ footer p {
 
 
 
-
-
 #carteiras {
     display: flex;
     flex-direction: column;
@@ -187,9 +185,32 @@ footer p {
 #btn-adicionar:hover {
     background-color: #219653;
 }
-
-
-
+#div-moedas-adicionadas {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 10px 0;
+}
+.moeda-adicionada {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #4d4d4d;
+    margin: 0;
+}
+.img-lixeira {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    opacity: 0.6;
+}
+.img-lixeira:hover {
+    opacity: 1;
+}
 
 
 .overlay {

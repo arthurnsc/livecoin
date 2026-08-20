@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/frontend/static/css/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <title>Dashboard</title>
 </head>
 <body>
@@ -12,8 +12,8 @@
             <h1>Criptomoedas</h1>
         </section>
         <nav>
-            <a href="index.html">Menu</a>
-            <a href="carteira.html">Carteira</a>
+            <a href="{{ url_for('home') }}">Menu</a>
+            <a href="{{ url_for('carteira') }}">Carteira</a>
         </nav>
     </header>
     <main>
@@ -84,6 +84,6 @@
 
         </section>
     </main>
-    <script src="/frontend/static/js/script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

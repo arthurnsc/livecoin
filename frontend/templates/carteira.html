@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/frontend/static/css/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <title>Carteira</title>
 </head>
 <body>
@@ -12,8 +12,8 @@
             <h1>Criptomoedas</h1>
         </section>
         <nav>
-            <a href="index.html">Menu</a>
-            <a href="dashboard.html">Dashboard</a>
+            <a href="{{ url_for('home') }}">Menu</a>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
         </nav>
     </header>
     <main>
@@ -42,38 +42,6 @@
                 </div>
             </article>
 
-            <article class="carteira">
-                <div class="info-carteira">
-                    <h4 class="h4-carteira">Carteira 3</h4>
-                    <p class="p-carteira">Valor total: R$ --</p>
-                </div>
-                <div class="acoes-carteira">
-                    <button class="btn-detalhes">Ver detalhes</button>
-                    <button class="btn-apagar">Apagar</button>
-                </div>
-            </article>
-
-            <article class="carteira">
-                <div class="info-carteira">
-                    <h4 class="h4-carteira">Carteira 4</h4>
-                    <p class="p-carteira">Valor total: R$ --</p>
-                </div>
-                <div class="acoes-carteira">
-                    <button class="btn-detalhes">Ver detalhes</button>
-                    <button class="btn-apagar">Apagar</button>
-                </div>
-            </article>
-
-            <article class="carteira">
-                <div class="info-carteira">
-                    <h4 class="h4-carteira">Carteira 5</h4>
-                    <p class="p-carteira">Valor total: R$ --</p>
-                </div>
-                <div class="acoes-carteira">
-                    <button class="btn-detalhes">Ver detalhes</button>
-                    <button class="btn-apagar">Apagar</button>
-                </div>
-            </article>
         </section>
 
         <section id="adicionar-carteira">
@@ -81,7 +49,7 @@
             <div id="overlay-modal" class="overlay">
                 <div class="modal">
                     <button class="btn-fechar-modal">
-                        <img src="/frontend/images/cruzado.png">
+                        <img src="{{ url_for('static', filename='images/cruzado.png') }}">
                     </button>
                     
                     <input class="input-moedas" type="text" id="nome-carteira" placeholder="Nome da Carteira">
@@ -104,20 +72,22 @@
                         </select>
                     </div>
                     <input class="input-moedas" id="btn-quantidade" type="number" placeholder="Exemplo: 0.00524">
+                    <div id="div-moedas-adicionadas">                      
+
+                    </div>
                     <button id="btn-adicionar-moeda">Adicionar Criptomoeda</button>
                     <button id="btn-salvar">Salvar</button>
                 </div>
             </div>
             <div id="overlay-modal" class="overlay">
                 <div class="modal">
-                    ...
                 </div>
             </div>
 
             <div id="overlay-modal-detalhes" class="overlay">
                 <div class="modal">
                     <button class="btn-fechar-modal">
-                        <img src="/frontend/images/cruzado.png">
+                        <img src="{{ url_for('static', filename='images/cruzado.png') }}">
                     </button>
                     <h2>Nome da Carteira</h2>
                     <p>Valor total: R$ --</p>
@@ -156,6 +126,6 @@
         </section>
 
     </main>
-    <script src="/frontend/static/js/carteira.js"></script>
+    <script src="{{ url_for('static', filename='js/carteira.js') }}"></script>
 </body>
 </html>
