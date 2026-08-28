@@ -44,33 +44,58 @@ def carteira():
     return render_template('carteira.html')
 
 
-@app.route('/carteiras', methods=['POST'])
+@app.route('/carteiras', methods=['GET', 'POST'])
 def criar_carteira():
-    dados = request.get_json()
-    print(dados)  # debug
+    if request.method == 'POST':
+        dados = request.get_json()
+        print(dados)  # debug
 
-    nome_carteira = dados['nome']
-    lista_criptomoedas = dados['criptomoedas']
+        nome_carteira = dados['nome']
+        lista_criptomoedas = dados['criptomoedas']
 
-    conexao = sqlite3.connect('tabelas.db')
-    cursor = conexao.cursor()
-    cursor.execute("""
-    INSERT INTO carteiras (nome) VALUES (?) 
-    """, (nome_carteira,))
-
-    carteira_id = cursor.lastrowid
-    for criptomoeda in lista_criptomoedas:
-        simbolo = criptomoeda['simbolo']
-        quantidade = criptomoeda['quantidade']
-
-
+        conexao = sqlite3.connect('tabelas.db')
+        cursor = conexao.cursor()
         cursor.execute("""
-        INSERT INTO moedascarteira (carteira_id, simbolo, quantidade) VALUES (?, ?, ?)
-        """, (carteira_id, simbolo, quantidade))
+        INSERT INTO carteiras (nome) VALUES (?) 
+        """, (nome_carteira,))
 
-    conexao.commit()
-    conexao.close()
-    return {'mensagem': 'Carteira criada'}, 201
+        carteira_id = cursor.lastrowid
+        for criptomoeda in lista_criptomoedas:
+            simbolo = criptomoeda['simbolo']
+            quantidade = criptomoeda['quantidade']
+
+            cursor.execute("""
+            INSERT INTO moedascarteira (carteira_id, simbolo, quantidade) VALUES (?, ?, ?)
+            """, (carteira_id, simbolo, quantidade))
+
+        conexao.commit()
+        conexao.close()
+        return {'mensagem': 'Carteira criada'}, 201
+    
+    else:
+        conexao = sqlite3.connect('tabelas.db')
+        cursor = conexao.cursor()
+        cursor.execute("""SELECT * FROM carteiras""")
+        carteiras = cursor.fetchall()
+
+        lista_final = []
+        for carteira in carteiras:
+            carteira_id = carteira[0]
+            nome = carteira[1]
+
+            cursor.execute("""SELECT * FROM moedascarteira WHERE carteira_id = ? """, (carteira_id,))
+            moedas = cursor.fetchall()
+
+            lista_criptomoedas_formatada = []
+            for moeda in moedas:
+                dicionario_moeda = {"simbolo": moeda[2], "quantidade": moeda[3]}
+                lista_criptomoedas_formatada.append(dicionario_moeda)
+
+            dicionario_carteira = {"id": carteira_id, "nome": nome, "moedas": lista_criptomoedas_formatada}
+            lista_final.append(dicionario_carteira)
+
+        conexao.close()
+        return lista_final
 
 
 if __name__ == '__main__':
