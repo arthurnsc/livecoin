@@ -97,6 +97,15 @@ def criar_carteira():
         conexao.close()
         return lista_final
 
+@app.route('/carteiras/<int:id>', methods=['DELETE'])
+def deletar_carteira(id):
+    conexao = sqlite3.connect('tabelas.db')
+    cursor = conexao.cursor()
+    cursor.execute("DELETE FROM moedascarteira WHERE carteira_id = ?", (id,))
+    cursor.execute("DELETE FROM carteiras WHERE id = ?", (id,))
+    conexao.commit()
+    conexao.close()
+    return {'mensagem': 'Carteira apagada'}, 200
 
 if __name__ == '__main__':
     criartabelas()

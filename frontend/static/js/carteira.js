@@ -18,7 +18,7 @@ function carregarCarteiras() {
                 </div>
                 <div class="acoes-carteira">
                     <button class="btn-detalhes">Ver detalhes</button>
-                    <button class="btn-apagar">Apagar</button>
+                    <button class="btn-apagar" data-id="${carteira.id}">Apagar</button>
                 </div>
             </article>
             `;
@@ -27,6 +27,16 @@ function carregarCarteiras() {
         document.querySelectorAll('.btn-detalhes').forEach(button => {
             button.addEventListener('click', () => {
                 overlaydetalhes.style.display = 'flex';
+            });
+        });
+
+        document.querySelectorAll('.btn-apagar').forEach(button => {
+            button.addEventListener('click', () => {
+                const id = button.dataset.id;
+                fetch(`/carteiras/${id}`, {method: 'DELETE'})
+                .then(() => {
+                    carregarCarteiras();
+                });
             });
         });
     })
