@@ -1,7 +1,41 @@
 let moedasCarteira = [];
 const divMoedasAdd = document.getElementById('div-moedas-adicionadas');
-
 const overlaycarteira = document.getElementById('overlay-modal');
+const seccarteira = document.getElementById('carteiras')
+
+
+function carregarCarteiras() {
+    seccarteira.innerHTML = '';
+    fetch('/carteiras')
+    .then(resposta => resposta.json())
+    .then(carteiras => {
+        carteiras.forEach(carteira => {
+            seccarteira.innerHTML += `
+            <article class="carteira">
+                <div class="info-carteira">
+                    <h4 class="h4-carteira">${carteira.nome}</h4>
+                    <p class="p-carteira">Valor total: x</p>
+                </div>
+                <div class="acoes-carteira">
+                    <button class="btn-detalhes">Ver detalhes</button>
+                    <button class="btn-apagar">Apagar</button>
+                </div>
+            </article>
+            `;
+        });
+
+        document.querySelectorAll('.btn-detalhes').forEach(button => {
+            button.addEventListener('click', () => {
+                overlaydetalhes.style.display = 'flex';
+            });
+        });
+    })
+    .catch(erro => {
+        console.error('Erro', erro);
+    });
+}
+carregarCarteiras()
+
 
 document.getElementById('btn-adicionar').addEventListener('click', () => {
     overlaycarteira.style.display = 'flex';
@@ -15,19 +49,11 @@ document.querySelectorAll('.btn-fechar-modal').forEach(button => {
 
 const overlaydetalhes = document.getElementById('overlay-modal-detalhes')
 
-document.querySelectorAll('.btn-detalhes').forEach(button => {
-    button.addEventListener('click', () => {
-        overlaydetalhes.style.display = 'flex';
-    });
-});
-
 document.querySelectorAll('.btn-fechar-modal').forEach(button => {
     button.addEventListener('click', () => {
         overlaydetalhes.style.display = 'none';
     });
 });
-
-
 
 function atualizarListaMoedas() {
     divMoedasAdd.innerHTML = '';
@@ -69,11 +95,8 @@ addCripto.addEventListener('click', () => {
 
 
 document.getElementById('btn-salvar').addEventListener('click', adicionarCarteira);
-
 function adicionarCarteira() {
-
     const nomeCarteira = document.getElementById('nome-carteira').value;
-
     if (nomeCarteira && moedasCarteira.length >= 1) {
 
         const novaCarteira = {
@@ -89,15 +112,13 @@ function adicionarCarteira() {
         .then(resposta => resposta.json())
         .then(dados => {
             console.log(dados);
+            carregarCarteiras()
         })
         .catch(erro => {
             console.error('Erro ao salvar carteira:', erro);
         });
     
-
-        alert('Carteira adicionada');
         moedasCarteira = [];
-        atualizarListaMoedas()
         overlaycarteira.style.display = 'none';
         document.getElementById('nome-carteira').value = '';
         document.getElementById('btn-quantidade').value = '';
