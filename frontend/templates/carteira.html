@@ -60,45 +60,50 @@
                 </div>
             </div>
 
-            <div id="overlay-modal-detalhes" class="overlay">
-                <div class="modal">
-                    <button class="btn-fechar-modal">
-                        <img src="{{ url_for('static', filename='images/cruzado.png') }}">
-                    </button>
-                    <h2>Nome da Carteira</h2>
-                    <p>Valor total: R$ --</p>
-                    <div id="detalhes-moedas">
-                        <p>Criptomoeda 1: Quantidade</p>
-                        <p>Criptomoeda 2: Quantidade</p>
-                        <p>Criptomoeda 3: Quantidade</p>
-                    </div>
-                    <details>
-                        <summary>Adicionar Criptomoeda</summary>
-                        <input class="input-moedas" type="text" id="nome-carteira" placeholder="Nome da Carteira">
-                        <div id="lista-moedas">
-                            <select class="input-moedas" name="criptomoedas" id="select-moedas">
-                                <option value="bitcoin">Bitcoin</option>
-                                <option value="ethereum">Ethereum</option>
-                                <option value="solana">Solana</option>
-                                <option value="xrp">XRP</option>
-                                <option value="BNB">BNB</option>
-                                <option value="cardano">Cardano</option>
-                                <option value="usdt">USDT</option>
-                                <option value="polkadot">Polkadot</option>
-                                <option value="avalanche">Avalanche</option>
-                                <option value="chainlink">Chainlink</option>
-                                <option value="polygon">Polygon</option>
-                                <option value="uniswap">Uniswap</option>
-                                <option value="dogecoin">Dogecoin</option>
-                                <option value="pepe">Pepe</option>
-                            </select>
-                        </div>
-                        <input class="input-moedas" id="btn-quantidade" type="number" placeholder="Exemplo: 0.00524">
-                        <button id="btn-adicionar-moeda">Adicionar Criptomoeda</button>
-                        <button id="btn-salvar">Salvar</button>
-                    </div>
-                </div>
+
+
+
+            
+<div id="overlay-modal-detalhes" class="overlay">
+    <div class="modal">
+        <button class="btn-fechar-modal">
+            <img src="{{ url_for('static', filename='images/cruzado.png') }}">
+        </button>
+
+        <div id="informacoes-carteira"></div>
+
+        <details>
+            <summary>Adicionar Criptomoeda</summary>
+            <div id="lista-moedas">
+                <select class="input-moedas" name="criptomoedas" id="select-moedas">
+                    <option value="bitcoin">Bitcoin</option>
+                    <option value="ethereum">Ethereum</option>
+                    <option value="solana">Solana</option>
+                    <option value="xrp">XRP</option>
+                    <option value="BNB">BNB</option>
+                    <option value="cardano">Cardano</option>
+                    <option value="usdt">USDT</option>
+                    <option value="polkadot">Polkadot</option>
+                    <option value="avalanche">Avalanche</option>
+                    <option value="chainlink">Chainlink</option>
+                    <option value="polygon">Polygon</option>
+                    <option value="uniswap">Uniswap</option>
+                    <option value="dogecoin">Dogecoin</option>
+                    <option value="pepe">Pepe</option>
+                </select>
             </div>
+            <input class="input-moedas" id="btn-quantidade" type="number" placeholder="Exemplo: 0.00524">
+            <button id="btn-adicionar-moeda">Adicionar Criptomoeda</button>
+            <button id="btn-salvar">Salvar</button>
+        </details>
+
+    </div>
+</div>
+
+
+
+
+
         </section>
 
     </main>

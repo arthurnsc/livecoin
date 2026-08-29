@@ -1,6 +1,8 @@
 let moedasCarteira = [];
+let todasCarteiras = [];
 const divMoedasAdd = document.getElementById('div-moedas-adicionadas');
 const overlaycarteira = document.getElementById('overlay-modal');
+const overlaydetalhes = document.getElementById('overlay-modal-detalhes')
 const seccarteira = document.getElementById('carteiras')
 
 
@@ -9,6 +11,7 @@ function carregarCarteiras() {
     fetch('/carteiras')
     .then(resposta => resposta.json())
     .then(carteiras => {
+        todasCarteiras = carteiras
         carteiras.forEach(carteira => {
             seccarteira.innerHTML += `
             <article class="carteira">
@@ -17,16 +20,30 @@ function carregarCarteiras() {
                     <p class="p-carteira">Valor total: x</p>
                 </div>
                 <div class="acoes-carteira">
-                    <button class="btn-detalhes">Ver detalhes</button>
+                    <button class="btn-detalhes" data-id="${carteira.id}">Ver detalhes</button>
                     <button class="btn-apagar" data-id="${carteira.id}">Apagar</button>
                 </div>
             </article>
             `;
         });
 
+
+        const divInformacoes = document.getElementById('informacoes-carteira')
         document.querySelectorAll('.btn-detalhes').forEach(button => {
             button.addEventListener('click', () => {
+                const id = button.dataset.id;
+                const carteiraEncontrada = todasCarteiras.find((carteira) => carteira.id == id)
+                console.log(carteiraEncontrada); //debug
+                divInformacoes.innerHTML = ''
                 overlaydetalhes.style.display = 'flex';
+                divInformacoes.innerHTML += `
+                    <h2 id="nome-carteira">${carteiraEncontrada.nome}</h2>
+                    <div id="detalhes-moedas"></div>
+                `
+                const divDetalhesMoedas = document.getElementById('detalhes-moedas');
+                carteiraEncontrada.moedas.forEach((moeda) => {
+                    divDetalhesMoedas.innerHTML += `<p>${moeda.simbolo} - ${moeda.quantidade}</p>`;
+                });
             });
         });
 
@@ -57,7 +74,6 @@ document.querySelectorAll('.btn-fechar-modal').forEach(button => {
     });
 });
 
-const overlaydetalhes = document.getElementById('overlay-modal-detalhes')
 
 document.querySelectorAll('.btn-fechar-modal').forEach(button => {
     button.addEventListener('click', () => {
