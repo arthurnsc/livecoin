@@ -68,9 +68,13 @@ function carregarCarteiras() {
                 const divDetalhesMoedas = document.getElementById('detalhes-moedas');
                 carteiraEncontrada.moedas.forEach((moeda) => {
                     const info = criptomoedas[moeda.simbolo];
-                    const precoAtual = precosAtuais[moeda.simbolo] || 0;
-                    const valorTotal = (precoAtual * moeda.quantidade).toFixed(info.decimais);
-                    divDetalhesMoedas.innerHTML += `<p>${moeda.quantidade} - ${info.nome} - ${info.moeda}${valorTotal}</p>`;
+                    const precoAtual = precosAtuais[moeda.simbolo];
+                    if (precoAtual !== undefined) {
+                        const valorTotal = (precoAtual * moeda.quantidade).toFixed(info.decimais);
+                        divDetalhesMoedas.innerHTML += `<p>${moeda.quantidade} - ${info.nome} - ${info.moeda}${valorTotal}</p>`;
+                    } else {
+                        divDetalhesMoedas.innerHTML += `<p>Carregando valores...</p>`;
+                    }
                 });
             });
         });
