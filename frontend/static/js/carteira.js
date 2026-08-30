@@ -1,6 +1,7 @@
 let moedasCarteira = [];
 let todasCarteiras = [];
 let precosAtuais = {};
+let valorTotal = 0
 
 const divMoedasAdd = document.getElementById('div-moedas-adicionadas');
 const overlaycarteira = document.getElementById('overlay-modal');
@@ -30,7 +31,33 @@ ws.onmessage = (event) => {
     const simbolo = resposta.data.s;
     const preco = parseFloat(resposta.data.c);
     precosAtuais[simbolo] = preco;
+
+    atualizarValoresCarteiras()
 };
+
+function atualizarValoresCarteiras() {
+    todasCarteiras.forEach(carteira => {
+        carregando = false
+        let valorTotal = 0;
+
+        carteira.moedas.forEach((moeda) => {
+            const precoAtual = precosAtuais[moeda.simbolo]
+            if (precoAtual === undefined) {
+                carregando = true
+            } else {
+                valorTotal += precoAtual * moeda.quantidade;
+            }
+        });
+
+        const elemento = document.getElementById(`valor-carteira-${carteira.id}`);
+
+        if (carregando){
+            elemento.innerHTML = `<p>Carregando valor...</p>`
+        } else {
+            elemento.innerHTML = `Valor total: $${valorTotal.toFixed(2)}`;
+        }
+    });
+}
 
 function carregarCarteiras() {
     seccarteira.innerHTML = '';
@@ -43,7 +70,7 @@ function carregarCarteiras() {
             <article class="carteira">
                 <div class="info-carteira">
                     <h4 class="h4-carteira">${carteira.nome}</h4>
-                    <p class="p-carteira">Valor total: x</p>
+                    <p class="p-carteira" id="valor-carteira-${carteira.id}">Valor total: $${valorTotal.toFixed(2)}</p>
                 </div>
                 <div class="acoes-carteira">
                     <button class="btn-detalhes" data-id="${carteira.id}">Ver detalhes</button>
