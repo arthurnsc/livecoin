@@ -65,42 +65,40 @@
 
 
             
-            <div id="overlay-modal-detalhes" class="overlay">
-                <div class="modal">
-                    <button class="btn-fechar-modal">
-                        <img src="{{ url_for('static', filename='images/cruzado.png') }}">
-                    </button>
+<div id="overlay-modal-detalhes" class="overlay">
+    <div class="modal">
+        <button class="btn-fechar-modal">
+            <img src="{{ url_for('static', filename='images/cruzado.png') }}">
+        </button>
 
-                    <div id="informacoes-carteira"></div>
+        <div id="informacoes-carteira"></div>
 
-                    <details>
-                        <summary>Adicionar Criptomoeda</summary>
-                        <div id="lista-moedas">
-                            <select class="input-moedas" name="criptomoedas" id="select-moedas">
-                                <option value="bitcoin">Bitcoin</option>
-                                <option value="ethereum">Ethereum</option>
-                                <option value="solana">Solana</option>
-                                <option value="xrp">XRP</option>
-                                <option value="BNB">BNB</option>
-                                <option value="cardano">Cardano</option>
-                                <option value="usdt">USDT</option>
-                                <option value="polkadot">Polkadot</option>
-                                <option value="avalanche">Avalanche</option>
-                                <option value="chainlink">Chainlink</option>
-                                <option value="polygon">Polygon</option>
-                                <option value="uniswap">Uniswap</option>
-                                <option value="dogecoin">Dogecoin</option>
-                                <option value="pepe">Pepe</option>
-                            </select>
-                        </div>
-                        <input class="input-moedas" id="btn-quantidade" type="number" placeholder="Exemplo: 0.00524">
-                        <button id="btn-adicionar-moeda">Adicionar Criptomoeda</button>
-                        <button id="btn-salvar">Salvar</button>
-                    </details>
-
-                </div>
+        <details>
+            <summary>Adicionar Criptomoeda</summary>
+            <div id="lista-moedas">
+                <select class="input-moedas" name="criptomoedas" id="select-moedas-detalhe">
+                    <option value="BTCUSDT">Bitcoin</option>
+                    <option value="ETHUSDT">Ethereum</option>
+                    <option value="SOLUSDT">Solana</option>
+                    <option value="XRPUSDT">XRP</option>
+                    <option value="BNBUSDT">BNB</option>
+                    <option value="ADAUSDT">Cardano</option>
+                    <option value="USDTBRL">USDT</option>
+                    <option value="DOTUSDT">Polkadot</option>
+                    <option value="AVAXUSDT">Avalanche</option>
+                    <option value="LINKUSDT">Chainlink</option>
+                    <option value="POLUSDT">Polygon</option>
+                    <option value="UNIUSDT">Uniswap</option>
+                    <option value="DOGEUSDT">Dogecoin</option>
+                    <option value="PEPEUSDT">Pepe</option>
+                </select>
             </div>
+            <input class="input-moedas" id="input-quantidade-detalhe" type="number" placeholder="Exemplo: 0.00524">
+            <button id="btn-adicionar-moeda-detalhe">Adicionar Criptomoeda</button>
+        </details>
 
+    </div>
+</div>
         </section>
 
     </main>

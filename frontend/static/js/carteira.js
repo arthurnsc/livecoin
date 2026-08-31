@@ -1,7 +1,7 @@
 let moedasCarteira = [];
 let todasCarteiras = [];
 let precosAtuais = {};
-let valorTotal = 0
+let carteiraAbertaId = null;
 
 const divMoedasAdd = document.getElementById('div-moedas-adicionadas');
 const overlaycarteira = document.getElementById('overlay-modal');
@@ -37,7 +37,7 @@ ws.onmessage = (event) => {
 
 function atualizarValoresCarteiras() {
     todasCarteiras.forEach(carteira => {
-        carregando = false
+        let carregando = false
         let valorTotal = 0;
 
         carteira.moedas.forEach((moeda) => {
@@ -51,10 +51,12 @@ function atualizarValoresCarteiras() {
 
         const elemento = document.getElementById(`valor-carteira-${carteira.id}`);
 
-        if (carregando){
-            elemento.innerHTML = `<p>Carregando valor...</p>`
-        } else {
-            elemento.innerHTML = `Valor total: $${valorTotal.toFixed(2)}`;
+        if (elemento) {
+            if (carregando){
+                elemento.innerHTML = `Carregando valor...`
+            } else {
+                elemento.innerHTML = `Valor total: $${valorTotal.toFixed(2)}`;
+            }
         }
     });
 }
@@ -70,7 +72,7 @@ function carregarCarteiras() {
             <article class="carteira">
                 <div class="info-carteira">
                     <h4 class="h4-carteira">${carteira.nome}</h4>
-                    <p class="p-carteira" id="valor-carteira-${carteira.id}">Valor total: $${valorTotal.toFixed(2)}</p>
+                    <p class="p-carteira" id="valor-carteira-${carteira.id}">Carregando valor...</p>
                 </div>
                 <div class="acoes-carteira">
                     <button class="btn-detalhes" data-id="${carteira.id}">Ver detalhes</button>
@@ -80,10 +82,13 @@ function carregarCarteiras() {
             `;
         });
 
+        atualizarValoresCarteiras();
+
         const divInformacoes = document.getElementById('informacoes-carteira')
         document.querySelectorAll('.btn-detalhes').forEach(button => {
             button.addEventListener('click', () => {
                 const id = button.dataset.id;
+                carteiraAbertaId = id;
                 const carteiraEncontrada = todasCarteiras.find((carteira) => carteira.id == id)
                 console.log(carteiraEncontrada); //debug
                 divInformacoes.innerHTML = ''
@@ -138,6 +143,32 @@ document.querySelectorAll('.btn-fechar-modal').forEach(button => {
 document.querySelectorAll('.btn-fechar-modal').forEach(button => {
     button.addEventListener('click', () => {
         overlaydetalhes.style.display = 'none';
+    });
+});
+
+document.getElementById('btn-adicionar-moeda-detalhe').addEventListener('click', () => {
+    if (!carteiraAbertaId) return;
+
+    const simbolo = document.getElementById('select-moedas-detalhe').value;
+    const quantidade = document.getElementById('input-quantidade-detalhe').value;
+
+    if (!quantidade) {
+        alert('Preencha a quantidade');
+        return;
+    }
+
+    fetch(`/carteiras/${carteiraAbertaId}/moedas`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ simbolo: simbolo, quantidade: parseFloat(quantidade) })
+    })
+    .then(resposta => resposta.json())
+    .then(() => {
+        document.getElementById('input-quantidade-detalhe').value = '';
+        carregarCarteiras();
+    })
+    .catch(erro => {
+        console.error('Erro ao adicionar moeda:', erro);
     });
 });
 
@@ -208,7 +239,7 @@ function adicionarCarteira() {
         overlaycarteira.style.display = 'none';
         document.getElementById('nome-carteira').value = '';
         document.getElementById('btn-quantidade').value = '';
-        document.getElementById('select-moedas').value = 'bitcoin';
+        document.getElementById('select-moedas').value = 'BTCUSDT';
     } else {
         alert('Preencha todos os dados');
     };

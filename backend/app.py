@@ -107,6 +107,24 @@ def deletar_carteira(id):
     conexao.close()
     return {'mensagem': 'Carteira apagada'}, 200
 
+@app.route('/carteiras/<int:id>/moedas', methods=['POST'])
+def adicionar_moeda(id):
+    dados = request.get_json()
+    simbolo = dados['simbolo']
+    quantidade = dados['quantidade']
+
+    conexao = sqlite3.connect('tabelas.db')
+    cursor = conexao.cursor()
+
+    cursor.execute("""
+    INSERT INTO moedascarteira (carteira_id, simbolo, quantidade) VALUES (?, ?, ?)
+    """, (id, simbolo, quantidade))
+
+    conexao.commit()
+    conexao.close()
+
+    return {'mensagem': 'Moeda adicionada'}, 201
+
 if __name__ == '__main__':
     criartabelas()
     app.run(debug=True)
