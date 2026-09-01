@@ -6,7 +6,6 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__,
             template_folder=os.path.join(basedir, '../frontend/templates'),
             static_folder=os.path.join(basedir, '../frontend/static'))
-feed = feedparser.parse("https://cointelegraph.com/rss")
 
 DB_PATH = os.path.join(basedir, 'tabelas.db')
 
@@ -50,7 +49,6 @@ def carteira():
 def criar_carteira():
     if request.method == 'POST':
         dados = request.get_json()
-        print(dados)  # debug
 
         nome_carteira = dados['nome']
         lista_criptomoedas = dados['criptomoedas']
@@ -161,4 +159,6 @@ def buscarNoticias():
     
 if __name__ == '__main__':
     criartabelas()
-    app.run(debug=True)
+    app.run()
+
+    

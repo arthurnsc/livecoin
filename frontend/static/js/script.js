@@ -24,9 +24,6 @@ ws.onmessage = (event) => {
     const simbolo = resposta.data.s;
     const preco = parseFloat(resposta.data.c);
     const variacao = parseFloat(resposta.data.P);
-
-    console.log(resposta); //debug temporario
-    console.log(resposta.data); //debug temporario
     
     const criptomoeda = criptomoedas[simbolo]
     const decimal = criptomoeda.decimais

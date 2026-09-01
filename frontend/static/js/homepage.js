@@ -4,7 +4,6 @@ function carregarNoticias(){
     fetch('/noticias')
     .then(response => response.json())
     .then(noticias => {
-        console.log(noticias) //debug
     
         noticias.forEach(noticia => {
             const doc = new DOMParser().parseFromString(noticia.resumo, 'text/html');

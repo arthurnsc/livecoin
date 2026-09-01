@@ -93,7 +93,6 @@ function carregarCarteiras() {
                 const id = button.dataset.id;
                 carteiraAbertaId = id;
                 const carteiraEncontrada = todasCarteiras.find((carteira) => carteira.id == id)
-                console.log(carteiraEncontrada); //debug
                 divInformacoes.innerHTML = ''
                 overlaydetalhes.style.display = 'flex';
                 divInformacoes.innerHTML += `
@@ -237,7 +236,6 @@ function adicionarCarteira() {
             })
             .then(resposta => resposta.json())
             .then(dados => {
-                console.log(dados);
                 carregarCarteiras()
             })
             .catch(erro => {
@@ -255,3 +253,4 @@ function adicionarCarteira() {
     }
 
 };
+
