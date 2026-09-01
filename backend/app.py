@@ -1,11 +1,12 @@
 import sqlite3
-import os
-from flask import Flask, request, render_template
+import os, feedparser
+from flask import Flask, request, render_template, jsonify
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__,
             template_folder=os.path.join(basedir, '../frontend/templates'),
             static_folder=os.path.join(basedir, '../frontend/static'))
+feed = feedparser.parse("https://cointelegraph.com/rss")
 
 
 def criartabelas():
@@ -125,6 +126,31 @@ def adicionar_moeda(id):
 
     return {'mensagem': 'Moeda adicionada'}, 201
 
+
+@app.route('/noticias')
+def buscarNoticias():
+    feed = feedparser.parse("https://cointelegraph.com/rss")
+    noticias = []
+
+    for noticia in feed.entries:
+        if noticia.get('category') == "Markets" or noticia.get('category') == "Latest News":
+
+            media = noticia.get('media_content', [{}])
+            if media:
+                imagem = media[0].get('url') 
+            else:
+                imagem = None
+
+            noticias.append({
+                "titulo": noticia.get("title", ""),
+                "link": noticia.get("link", "#"),
+                "data": noticia.get("published", ""),
+                "resumo": noticia.get("summary", ""),
+                "imagem": imagem
+            })
+
+    return jsonify(noticias)
+    
 if __name__ == '__main__':
     criartabelas()
     app.run(debug=True)
