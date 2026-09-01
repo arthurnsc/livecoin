@@ -41,7 +41,7 @@ function atualizarValoresCarteiras() {
         let valorTotal = 0;
 
         carteira.moedas.forEach((moeda) => {
-            const precoAtual = precosAtuais[moeda.simbolo]
+            const precoAtual = moeda.simbolo === 'USDTBRL' ? 1 : precosAtuais[moeda.simbolo];
             if (precoAtual === undefined) {
                 carregando = true
             } else {
