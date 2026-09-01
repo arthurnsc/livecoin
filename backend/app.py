@@ -56,6 +56,13 @@ def criar_carteira():
 
         conexao = sqlite3.connect('tabelas.db')
         cursor = conexao.cursor()
+
+        cursor.execute("SELECT COUNT(*) FROM carteiras")
+        total = cursor.fetchone()[0]
+        if total >=5:
+            conexao.close()
+            return {'mensagem': 'Limite de carteiras atingido'}, 400
+        
         cursor.execute("""
         INSERT INTO carteiras (nome) VALUES (?) 
         """, (nome_carteira,))

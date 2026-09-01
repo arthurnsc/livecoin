@@ -2,6 +2,7 @@ let moedasCarteira = [];
 let todasCarteiras = [];
 let precosAtuais = {};
 let carteiraAbertaId = null;
+let quantidadeCarteiras = 0;
 
 const divMoedasAdd = document.getElementById('div-moedas-adicionadas');
 const overlaycarteira = document.getElementById('overlay-modal');
@@ -62,6 +63,7 @@ function atualizarValoresCarteiras() {
 }
 
 function carregarCarteiras() {
+    quantidadeCarteiras = 0;
     seccarteira.innerHTML = '';
     fetch('/carteiras')
     .then(resposta => resposta.json())
@@ -80,6 +82,7 @@ function carregarCarteiras() {
                 </div>
             </article>
             `;
+            quantidadeCarteiras++;
         });
 
         atualizarValoresCarteiras();
@@ -213,34 +216,42 @@ addCripto.addEventListener('click', () => {
 
 document.getElementById('btn-salvar').addEventListener('click', adicionarCarteira);
 function adicionarCarteira() {
-    const nomeCarteira = document.getElementById('nome-carteira').value;
-    if (nomeCarteira && moedasCarteira.length >= 1) {
 
-        const novaCarteira = {
-            nome: nomeCarteira,
-            criptomoedas: moedasCarteira
-        };
+     if (quantidadeCarteiras >= 5) {
+        alert('Você atingiu o limite de 5 carteiras.');
+        return;
 
-        fetch('/carteiras', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(novaCarteira)
-        })
-        .then(resposta => resposta.json())
-        .then(dados => {
-            console.log(dados);
-            carregarCarteiras()
-        })
-        .catch(erro => {
-            console.error('Erro ao salvar carteira:', erro);
-        });
+    } else{
+        const nomeCarteira = document.getElementById('nome-carteira').value;
+        if (nomeCarteira && moedasCarteira.length >= 1) {
     
-        moedasCarteira = [];
-        overlaycarteira.style.display = 'none';
-        document.getElementById('nome-carteira').value = '';
-        document.getElementById('btn-quantidade').value = '';
-        document.getElementById('select-moedas').value = 'BTCUSDT';
-    } else {
-        alert('Preencha todos os dados');
-    };
+            const novaCarteira = {
+                nome: nomeCarteira,
+                criptomoedas: moedasCarteira
+            };
+    
+            fetch('/carteiras', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(novaCarteira)
+            })
+            .then(resposta => resposta.json())
+            .then(dados => {
+                console.log(dados);
+                carregarCarteiras()
+            })
+            .catch(erro => {
+                console.error('Erro ao salvar carteira:', erro);
+            });
+        
+            moedasCarteira = [];
+            overlaycarteira.style.display = 'none';
+            document.getElementById('nome-carteira').value = '';
+            document.getElementById('btn-quantidade').value = '';
+            document.getElementById('select-moedas').value = 'BTCUSDT';
+        } else {
+            alert('Preencha todos os dados');
+        };
+    }
+
 };
