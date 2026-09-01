@@ -8,9 +8,10 @@ app = Flask(__name__,
             static_folder=os.path.join(basedir, '../frontend/static'))
 feed = feedparser.parse("https://cointelegraph.com/rss")
 
+DB_PATH = os.path.join(basedir, 'tabelas.db')
 
 def criartabelas():
-    conexao = sqlite3.connect('tabelas.db')
+    conexao = sqlite3.connect(DB_PATH)
     cursor = conexao.cursor()
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS carteiras (
@@ -54,7 +55,7 @@ def criar_carteira():
         nome_carteira = dados['nome']
         lista_criptomoedas = dados['criptomoedas']
 
-        conexao = sqlite3.connect('tabelas.db')
+        conexao = sqlite3.connect(DB_PATH)
         cursor = conexao.cursor()
 
         cursor.execute("SELECT COUNT(*) FROM carteiras")
@@ -81,7 +82,7 @@ def criar_carteira():
         return {'mensagem': 'Carteira criada'}, 201
     
     else:
-        conexao = sqlite3.connect('tabelas.db')
+        conexao = sqlite3.connect(DB_PATH)
         cursor = conexao.cursor()
         cursor.execute("""SELECT * FROM carteiras""")
         carteiras = cursor.fetchall()
@@ -107,7 +108,7 @@ def criar_carteira():
 
 @app.route('/carteiras/<int:id>', methods=['DELETE'])
 def deletar_carteira(id):
-    conexao = sqlite3.connect('tabelas.db')
+    conexao = sqlite3.connect(DB_PATH)
     cursor = conexao.cursor()
     cursor.execute("DELETE FROM moedascarteira WHERE carteira_id = ?", (id,))
     cursor.execute("DELETE FROM carteiras WHERE id = ?", (id,))
@@ -121,7 +122,7 @@ def adicionar_moeda(id):
     simbolo = dados['simbolo']
     quantidade = dados['quantidade']
 
-    conexao = sqlite3.connect('tabelas.db')
+    conexao = sqlite3.connect(DB_PATH)
     cursor = conexao.cursor()
 
     cursor.execute("""
@@ -161,4 +162,3 @@ def buscarNoticias():
 if __name__ == '__main__':
     criartabelas()
     app.run(debug=True)
-
