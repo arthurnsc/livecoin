@@ -218,6 +218,8 @@ footer p {
 }
 
 
+
+
 .overlay {
     display: none;
     position: fixed;
@@ -306,7 +308,6 @@ footer p {
     margin: 40px 0px 24px 0px;
     width: 100%;
 }
-
 #sec-noticias {
     width: 100%;
     box-sizing: border-box;
@@ -316,7 +317,6 @@ footer p {
     gap: 24px;
     text-align: left;
 }
-
 .card-noticia {
   border: 1px solid #e0e0e0;
   border-radius: 10px;
@@ -326,7 +326,6 @@ footer p {
   flex-direction: column;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
-
 .img-noticia {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -334,16 +333,13 @@ footer p {
   border-radius: 6px;
   margin-bottom: 12px;
 }
-
 .h3-noticia {
   font-size: 16px;
   font-weight: bold;
   color: #333333;
   margin: 0px 0px 8px 0px;
   line-height: 22px;
-
 }
-
 .p-noticia {
   font-size: 13px;
   color: #666666;
@@ -351,14 +347,12 @@ footer p {
   margin: 0px 0px 14px 0px;
   flex-grow: 1;
 }
-
 .card-noticia a {
   color: #0066cc;
   font-weight: bold;
   text-decoration: none;
   font-size: 14px;
 }
-
 .card-noticia a:hover {
   text-decoration: underline;
 }
