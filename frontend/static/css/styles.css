@@ -356,3 +356,48 @@ footer p {
 .card-noticia a:hover {
   text-decoration: underline;
 }
+
+
+
+
+@media (max-width: 768px) {
+    body {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    nav {
+        gap: 20px;
+    }
+    header {
+        justify-content: center;
+        text-align: center;
+    }
+    .div-cripto,
+    #informacoes {
+        grid-template-columns: 40px 1fr 1fr;
+        font-size: 13px;
+    }
+    .img-cripto {
+        width: 35px;
+        height: 35px;
+        margin-right: 10px;
+    }
+    #sec-noticias {
+        grid-template-columns: 1fr;
+    }
+    .carteira {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .acoes-carteira {
+        width: 100%;
+        justify-content: flex-end;
+    }
+    #adicionar-carteira {
+        float: none;
+    }
+    .modal {
+        max-width: 60%;
+    }
+}
