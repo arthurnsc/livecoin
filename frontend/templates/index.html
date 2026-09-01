@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <title>Site cripto</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>LiveCoin</title>
 </head>
 <body>
     <header>
         <section>
-            <h1>Criptomoedas</h1>
+            <h1>LiveCoin</h1>
         </section>
         <nav>
             <a href="{{ url_for('dashboard') }}">Dashboard</a>
@@ -18,18 +19,21 @@
     </header>
     <main>
         <section id="sec-menu">
-            <h2>Bem-vindo ao site de criptomoedas sem nome!</h2>
+            <h2>Bem-vindo ao LiveCoin!</h2>
             <h3>Veja o valor das criptomoedas e da sua carteira digital em tempo real</h3>
         </section>
 
         <h2 id="h2-noticias">Últimas notícias</h2>
         <section id="sec-noticias"></section>
-
     </main>
-    <footer>
-        <p>Quem somos?</p>
-        <p>Futuramente...</p>
-    </footer>
+<footer>
+    <p>Desenvolvido por Arthur</p>
+    <div id="div-informacoes">
+        <a href="https://github.com/arthurnsc" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/arthurnsc" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a href="https://instagram.com/_arthurnunes" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>
+    </div>
+</footer>
     <script src="{{ url_for('static', filename='js/homepage.js') }}"></script>
 </body>
 </html>
